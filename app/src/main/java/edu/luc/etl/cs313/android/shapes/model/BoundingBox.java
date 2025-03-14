@@ -17,38 +17,51 @@ public class BoundingBox implements Visitor<Location> {
 
     @Override
     public Location onFill(final Fill f) {
-        return null;
+
+        return f.getShape().accept(this);
     }
 
     @Override
     public Location onGroup(final Group g) {
 
-        return null;
+        int minX = Integer.MAX_VALUE;
+
+        int maxX = 0;
+        int minY = Integer.MAX_VALUE;
+        int maxY = 0;
+        for (Shape s : g.getShapes()) {
+        }
+        return new Location(minX, minY, new Rectangle(maxX - minX, maxY - minY));
     }
 
     @Override
     public Location onLocation(final Location l) {
 
-        return null;
+        Location loc = l.getShape().accept(this);
+        return new Location(l.getX() + loc.getX(), l.getY() + loc.getY(), loc.getShape());
     }
 
     @Override
     public Location onRectangle(final Rectangle r) {
-        return null;
+
+        return new Location(0, 0, new Rectangle(r.getWidth(), r.getHeight()));
     }
 
     @Override
     public Location onStrokeColor(final StrokeColor c) {
-        return null;
+
+        return c.getShape().accept(this);
     }
 
     @Override
     public Location onOutline(final Outline o) {
-        return null;
+
+        return o.getShape().accept(this);
     }
 
     @Override
     public Location onPolygon(final Polygon s) {
+
         return null;
     }
 }
