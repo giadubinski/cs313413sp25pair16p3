@@ -15,15 +15,18 @@ public class Rectangle implements Shape {
     }
 
     public int getWidth() {
+
         return width;
     }
 
     public int getHeight() {
+
         return height;
     }
 
     @Override
     public <Result> Result accept(final Visitor<Result> v) {
+
         return v.onRectangle(this);
     }
 }
