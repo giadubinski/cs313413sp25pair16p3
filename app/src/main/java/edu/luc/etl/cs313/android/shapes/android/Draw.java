@@ -17,8 +17,8 @@ public class Draw implements Visitor<Void> {
     private final Paint paint;
 
     public Draw(final Canvas canvas, final Paint paint) {
-        this.canvas = canvas; // FIXME
-        this.paint = paint; // FIXME
+        this.canvas = canvas;
+        this.paint = paint;
         paint.setStyle(Style.STROKE);
     }
 
@@ -34,8 +34,10 @@ public class Draw implements Visitor<Void> {
         int firstColor = paint.getColor();
 
         paint.setColor(c.getColor());
+        paint.setStyle(Style.FILL_AND_STROKE);
         c.getShape().accept(this);
         paint.setColor(firstColor);
+        paint.setStyle(Style.STROKE);
 
         return null;
     }
@@ -55,7 +57,13 @@ public class Draw implements Visitor<Void> {
     public Void onGroup(final Group g) {
 
         for(Shape shape : g.getShapes()) {
-            shape.accept(this);
+
+            if(shape instanceof Location) {
+                shape.accept(this);
+            }
+            else {
+                shape.accept(this);
+            }
         }
         return null;
     }
@@ -96,6 +104,7 @@ public class Draw implements Visitor<Void> {
         final float[] pts = null;
 
         canvas.drawLines(pts, paint);
+
         return null;
     }
 }
