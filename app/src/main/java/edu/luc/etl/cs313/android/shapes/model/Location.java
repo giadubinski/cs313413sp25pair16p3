@@ -16,19 +16,23 @@ public class Location implements Shape {
     }
 
     public Shape getShape() {
+
         return shape;
     }
 
     public int getX() {
+
         return x;
     }
 
     public int getY() {
+
         return y;
     }
 
     @Override
     public <Result> Result accept(final Visitor<Result> v) {
+
         return v.onLocation(this);
     }
 }
