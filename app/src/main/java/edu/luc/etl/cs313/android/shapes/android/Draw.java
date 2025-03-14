@@ -58,23 +58,18 @@ public class Draw implements Visitor<Void> {
 
         for(Shape shape : g.getShapes()) {
 
-            if(shape instanceof Location) {
-                shape.accept(this);
-            }
-            else {
-                shape.accept(this);
-            }
+           shape.accept(this);
         }
+        canvas.restore();
         return null;
     }
 
     @Override
     public Void onLocation(final Location l) {
 
-        canvas.save();
         canvas.translate(l.getX(), l.getY());
         l.getShape().accept(this);
-        canvas.restore();
+        canvas.translate(-l.getX(), -l.getY());
 
         return null;
     }
