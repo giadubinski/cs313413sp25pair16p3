@@ -25,7 +25,7 @@ public class StrokeColor implements Shape {
 
     public Shape getShape() {
 
-        return shape;
+        return ;
     }
 
     @Override
