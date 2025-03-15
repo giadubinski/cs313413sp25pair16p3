@@ -60,7 +60,6 @@ public class Draw implements Visitor<Void> {
 
            shape.accept(this);
         }
-        canvas.restore();
         return null;
     }
 
